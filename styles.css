@@ -1,4 +1,4 @@
-/* styles.css */
+/* ------------------ Base Styles ------------------ */
 body {
   margin: 0;
   padding: 0;
@@ -11,16 +11,27 @@ body {
   color: #fff;
 }
 
+/* ------------------ Layout ------------------ */
 .container {
   text-align: center;
 }
 
+/* ------------------ Typography ------------------ */
 h1 {
   font-size: 3em;
   margin-bottom: 0.5em;
+  transition: color 0.4s ease;
 }
 
 p {
   font-size: 1.2em;
   opacity: 0.85;
+  transition: color 0.4s ease;
+}
+
+/* ------------------ Interactions ------------------ */
+h1:hover,
+p:hover {
+  color: #ffcc00;
+  cursor: default;
 }
