@@ -1,0 +1,505 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aston Martin Technology Strategy Infographic - Grafana Edition</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <!-- 
+        Infographic Plan Summary:
+        The infographic visualizes Aston Martin's technology strategy, covering:
+        1.  Header & Introduction: Overall vision and investment.
+        2.  Core Strategic Pillars: Innovation, Sustainability, Ultra-Luxury Performance.
+        3.  The Electrification Journey: Phased approach, PHEV/BEV timeline, powertrain mix.
+        4.  Powering Performance: F1 Tech Nexus & Cloud (AI, Data).
+        5.  Crafting the Digital Experience: In-car tech, cloud-powered customer engagement.
+        6.  Sustainable Manufacturing: "Racing. Green." achievements and targets.
+        7.  Strategic Alliances: Key technology partnerships.
+        8.  Navigating the Future: Challenges, and outlook.
+        9.  Footer.
+        The language is aligned with the Deep Research report, with added notes on Grafana's potential role.
+
+        Visualization Choices Summary:
+        - Overall Investment (£2B): Single Big Number (HTML/CSS). Goal: Inform.
+        - Core Strategic Pillars: HTML/CSS Diagram (3 styled boxes). Goal: Organize.
+        - Electrification Timeline: HTML/CSS Timeline. Goal: Change.
+        - Projected Powertrain Mix (Next 5 Years): Donut Chart (Chart.js). Goal: Compare/Inform.
+        - F1 Tech Partners & Data: HTML/CSS styled list/cards & Big Number. Goal: Organize/Inform.
+        - Cloud for Customer Experience Impact: Big Number/Stat Callouts (HTML/CSS). Goal: Inform.
+        - Sustainable Manufacturing Achievements & Targets: Icon-based stats & HTML/CSS progress style. Goal: Inform/Change.
+        - Key Technology Partners Diagram: HTML/CSS Hub-and-Spoke style. Goal: Organize/Relationships.
+        - Key Challenges & R&D/Capex: HTML/CSS styled list & Big Numbers. Goal: Organize/Inform.
+        All visualizations avoid SVG and Mermaid JS, using Chart.js (Canvas) or HTML/CSS.
+
+        Color Palette Chosen: Grafana Branded (Light Theme Adaptation)
+        - Body Background: #F8F9FA (Very Light Grey)
+        - Card Background: #FFFFFF (White)
+        - Primary Text: #2C3E50 (Dark Slate Blue)
+        - Primary Accent (Grafana Orange): #F47A20 
+        - Secondary Accent (Grafana Yellow/Gold): #FCAE1E
+        - Tertiary Accent (Grafana Blue): #3498DB
+        - Border Color Light: #DEE2E6
+
+        Confirmation: NEITHER Mermaid JS NOR SVG were used anywhere in this output. All diagrams and charts are implemented using HTML/CSS or Chart.js (Canvas). Grafana mentions added. Gemini API features removed.
+    -->
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #F8F9FA; /* Grafana - Very Light Grey */
+            color: #2C3E50; /* Grafana - Dark Slate Blue */
+        }
+        .chart-container {
+            position: relative;
+            width: 100%;
+            max-width: 500px;
+            margin-left: auto;
+            margin-right: auto;
+            height: 300px; 
+            max-height: 350px;
+        }
+        @media (min-width: 768px) {
+            .chart-container {
+                height: 350px;
+                max-height: 400px;
+            }
+        }
+        .stat-card {
+            background-color: #FFFFFF; /* Grafana - White */
+            border-radius: 0.5rem;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.04);
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+            border-left: 5px solid #F47A20; /* Grafana - Orange Accent */
+        }
+        .section-title {
+            color: #F47A20; /* Grafana - Orange */
+            font-weight: 700;
+            border-bottom: 2px solid #FCAE1E; /* Grafana - Yellow */
+            padding-bottom: 0.5rem;
+            margin-bottom: 1rem;
+        }
+        .big-number {
+            font-size: 3rem;
+            font-weight: 700;
+            color: #F47A20; /* Grafana - Orange */
+            line-height: 1;
+        }
+        .timeline-item {
+            position: relative;
+            padding-left: 2rem;
+            border-left: 2px solid #C65100;; /* Grafana - Blue */
+        }
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: -0.5rem;
+            top: 0.25rem;
+            width: 1rem;
+            height: 1rem;
+            background-color: #F47A20; /* Grafana - Orange */
+            border-radius: 50%;
+            border: 2px solid #F8F9FA; /* Grafana - Body BG */
+        }
+        .html-diagram-box {
+            border: 2px solid #F47A20;; /* Grafana - Blue */
+            padding: 1rem;
+            border-radius: 0.5rem;
+            text-align: center;
+            background-color: #FFFFFF; /* Grafana - White */
+            min-height: 140px; /* Increased height for Grafana text */
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+        .hub-spoke-center {
+            width: 130px; /* Slightly larger for text */
+            height: 130px;
+            border-radius: 50%;
+            background-color: #F47A20; /* Grafana - Orange */
+            color: white;
+            display: flex;
+            flex-direction: column; /* Allow text stacking */
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            font-weight: 600;
+            margin: 1rem auto;
+            position: relative;
+            padding: 0.5rem;
+        }
+        .hub-spoke-arm {
+            background-color: #E9F5FD; /* Lighter blue for arms */
+            padding: 0.75rem;
+            border-radius: 0.5rem;
+            text-align: center;
+            font-size: 0.9rem;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+            border: 1px solid #F47A20; /* Grafana - Blue */
+        }
+        .hub-container {
+            position: relative;
+            padding: 20px;
+        }
+        .grafana-mention {
+            font-size: 0.8rem;
+            color: #5A6A7A; /* Muted text for Grafana mentions */
+            margin-top: 0.5rem;
+            font-style: italic;
+        }
+    </style>
+</head>
+<body class="antialiased">
+
+    <header class="bg-[#F47A20] text-white p-6 text-center shadow-lg">
+        <h1 class="text-4xl font-bold">Aston Martin's Tech Horizon</h1>
+        <p class="text-xl mt-2">Steering Towards a High-Performance, Sustainable Future</p>
+    </header>
+
+    <main class="container mx-auto p-4 md:p-8">
+
+        <section id="intro" class="mb-12">
+            <div class="stat-card text-center">
+                <h2 class="section-title text-3xl">A Transformative Technological Trajectory</h2>
+                <p class="mt-4 text-lg">Aston Martin is navigating a transformative era, balancing its storied heritage with the drive towards electrification, advanced digital experiences, and sustainable manufacturing. This is underpinned by significant investment and strategic partnerships.</p>
+                <div class="mt-6">
+                    <p class="text-lg font-semibold">Total Planned Investment (2023-2027):</p>
+                    <p class="big-number">~£2 Billion</p>
+                    <p class="text-sm text-gray-600">Directed towards long-term growth and electrification strategy.</p>
+                </div>
+                 <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mt-6">
+                    <div class="bg-[#FFF3E0] p-4 rounded-lg shadow">
+                        <p class="font-semibold text-[#2C3E50]">FY 2024 Capex:</p>
+                        <p class="text-2xl font-bold text-[#F47A20]">£401 Million</p>
+                    </div>
+                    <div class="bg-[#FFF3E0] p-4 rounded-lg shadow">
+                        <p class="font-semibold text-[#2C3E50]">2024 R&D Expenditure:</p>
+                        <p class="text-2xl font-bold text-[#F47A20]">£333.3 Million</p>
+                    </div>
+                </div>
+                <p class="grafana-mention mt-4">Grafana dashboards could track the performance and ROI of these technology investments, providing real-time visibility into key financial and operational metrics.</p>
+            </div>
+
+            <div class="stat-card mt-8">
+                <h3 class="section-title text-2xl">Core Strategic Pillars</h3>
+                <p class="mb-6">Aston Martin's technology strategy is built upon foundational pillars reflecting its brand identity and future aspirations.</p>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                    <div class="html-diagram-box">
+                        <span class="text-4xl mb-2">🚀</span>
+                        <h4 class="text-xl font-semibold text-[#F47A20]">Relentless Innovation</h4>
+                        <p class="text-sm">Driving a breathtaking portfolio with the latest technology and time-honoured craftsmanship.</p>
+                        <p class="grafana-mention">Grafana can visualize R&D pipeline velocity and innovation KPIs.</p>
+                    </div>
+                    <div class="html-diagram-box">
+                        <span class="text-4xl mb-2">🌿</span>
+                        <h4 class="text-xl font-semibold text-[#F47A20]">"Racing. Green." Sustainability</h4>
+                        <p class="text-sm">Integrating sustainability deeply into the business, targeting carbon neutrality and net-zero supply chains.</p>
+                        <p class="grafana-mention">Grafana can monitor energy consumption, emissions, and progress towards sustainability goals.</p>
+                    </div>
+                    <div class="html-diagram-box">
+                        <span class="text-4xl mb-2">🏆</span>
+                        <h4 class="text-xl font-semibold text-[#F47A20]">Ultra-Luxury Performance</h4>
+                        <p class="text-sm">Creating the world's most desirable, exquisitely addictive performance cars, enabled by technology.</p>
+                        <p class="grafana-mention">Grafana can track vehicle performance telemetry and manufacturing quality metrics.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="electrification" class="mb-12">
+            <div class="stat-card">
+                <h2 class="section-title text-3xl">The Electrification Journey</h2>
+                <p class="mt-4 mb-6 text-lg">Aston Martin is pursuing a pragmatic, phased "blended drivetrain approach" to electrification, with Plug-in Hybrid Electric Vehicles (PHEVs) serving as a technological bridge to full Battery Electric Vehicles (BEVs), while strategically continuing its iconic Internal Combustion Engine (ICE) heritage.</p>
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
+                    <div>
+                        <h3 class="text-xl font-semibold mb-3 text-[#F47A20]">Electrification Roadmap Highlights:</h3>
+                        <div class="space-y-6">
+                            <div class="timeline-item">
+                                <h4 class="font-semibold text-lg">H2 2025: Valhalla PHEV Supercar</h4>
+                                <p class="text-sm">Deliveries commence for the first series-production mid-engined PHEV, incorporating F1-derived technology.</p>
+                            </div>
+                            <div class="timeline-item">
+                                <h4 class="font-semibold text-lg">By 2026: Electrified Option for All New Lines</h4>
+                                <p class="text-sm">All new Aston Martin product lines will offer an electrified powertrain option (PHEV or BEV).</p>
+                            </div>
+                            <div class="timeline-item">
+                                <h4 class="font-semibold text-lg">~2026-2028: First BEV Launch</h4>
+                                <p class="text-sm">Target launch for the first Aston Martin BEV, likely an SUV, leveraging Lucid Group powertrain technology.</p>
+                            </div>
+                            <div class="timeline-item">
+                                <h4 class="font-semibold text-lg">By 2030: Fully Electrified Core Portfolio</h4>
+                                <p class="text-sm">The entire core Sport/GT and SUV portfolio will be electrified.</p>
+                            </div>
+                        </div>
+                         <p class="mt-6 text-sm text-gray-700">Aston Martin will continue V12 and V8 ICE production for as long as feasible, potentially utilizing low-volume exemptions, reflecting current market demand and brand DNA.</p>
+                         <p class="grafana-mention mt-2">Grafana can monitor BEV/PHEV performance, battery health, charging infrastructure uptime, and the efficiency of the electrification rollout.</p>
+                    </div>
+                    <div>
+                        <h3 class="text-xl font-semibold mb-3 text-center text-[#F47A20]">Projected Powertrain Mix (Next 5 Years)</h3>
+                        <p class="text-sm text-center mb-2">Illustrating the continued significance of ICE and Hybrid technologies in the near term.</p>
+                        <div class="chart-container">
+                            <canvas id="powertrainMixChart"></canvas>
+                        </div>
+                        <p class="text-center mt-2 text-sm text-gray-600">CEO Adrian Hallmark estimates ~85% of sales will be ICE-based (pure or hybrid) in the next five years.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="f1-cloud" class="mb-12">
+            <div class="stat-card">
+                <h2 class="section-title text-3xl">Powering Performance: The F1 Tech Nexus & Cloud</h2>
+                <p class="mt-4 mb-6 text-lg">The Aston Martin Aramco Formula One™ Team serves as a crucible for innovation, heavily leveraging High-Performance Computing (HPC), AI, and advanced data analytics, with significant technology transfer to road cars. Cloud technologies are pivotal in this high-octane environment.</p>
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                    <div>
+                        <h3 class="text-xl font-semibold mb-3 text-[#F47A20]">F1 as an Innovation Incubator:</h3>
+                        <ul class="list-disc list-inside space-y-2 text-sm">
+                            <li>Valkyrie hypercar merges F1® technology with a road car.</li>
+                            <li>Valhalla PHEV incorporates learnings and technologies from F1.</li>
+                            <li>Aerodynamic advancements influence future road models, including EVs.</li>
+                            <li>"Aston Martin Performance Technologies" division facilitates tech transfer.</li>
+                        </ul>
+                        <div class="mt-6 bg-[#FFF3E0] p-4 rounded-lg shadow">
+                            <p class="font-semibold text-[#2C3E50]">Illustrative F1 Data:</p>
+                            <p class="text-2xl font-bold text-[#F47A20]">Over 1.5TB of Data</p>
+                            <p class="text-sm">Generated and analyzed per race weekend by top F1 teams, showcasing the scale of data operations.</p>
+                        </div>
+                        <p class="grafana-mention mt-2">Grafana excels at visualizing and alerting on real-time F1 telemetry, HPC cluster performance, and AI model training metrics, crucial for race strategy and car development.</p>
+                    </div>
+                    <div>
+                        <h3 class="text-xl font-semibold mb-3 text-[#F47A20]">Key F1 Technology & Cloud Partners:</h3>
+                        <div class="space-y-3 text-sm">
+                            <div class="p-3 bg-white rounded shadow border-l-4 border-[#C65100]"><strong>CoreWeave:</strong> Official AI Cloud Computing Partner, relocating on-prem HPC to a specialized AI cloud to accelerate engineering and car design.</div>
+                            <div class="p-3 bg-white rounded shadow border-l-4 border-[#C65100]"><strong>Arm:</strong> AI Compute Platform Partner for real-time edge processing, AI offloading, computer vision, and sensor fusion.</div>
+                            <div class="p-3 bg-white rounded shadow border-l-4 border-[#C65100]"><strong>NetApp:</strong> Data management solutions for data mobility, reliability, and real-time analytics from factory to trackside, including hybrid cloud capabilities.</div>
+                            <div class="p-3 bg-white rounded shadow border-l-4 border-[#C65100]"><strong>ServiceNow:</strong> Digital transformation platform for automating IT, facilities, HR, and finance workflows.</div>
+                        </div>
+                        <p class="mt-4 text-xs text-gray-600">These partnerships provide access to leading-edge capabilities essential for F1 competitiveness. Grafana can integrate data from these diverse systems to provide a unified view of F1 tech operations.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="digital-experience" class="mb-12">
+            <div class="stat-card">
+                <h2 class="section-title text-3xl">Crafting the Digital Experience</h2>
+                <p class="mt-4 mb-6 text-lg">Aston Martin is investing significantly in its in-car digital ecosystem and leveraging cloud platforms to deliver personalized and engaging customer experiences.</p>
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                    <div>
+                        <h3 class="text-xl font-semibold mb-3 text-[#F47A20]">Next-Generation In-House Infotainment:</h3>
+                        <ul class="list-disc list-inside space-y-2 text-sm">
+                            <li>Launched in 2023 on the DB12, featuring a 10.25-inch "Pure Black" touchscreen.</li>
+                            <li>Full online connectivity and software upgradability (OTA updates via connectivity app).</li>
+                            <li>World-first integration of **Apple CarPlay Ultra** for deeper vehicle function control.</li>
+                            <li>Balanced UX/UI: Modern touchscreen with retained physical buttons.</li>
+                            <li>Specific c.£15m investment in Q1 2025 for software enhancements.</li>
+                        </ul>
+                        <p class="mt-4 text-sm text-gray-700">ADAS strategy focuses on enhancing active safety and driver support.</p>
+                        <p class="grafana-mention mt-2">Grafana can monitor the performance and reliability of the in-house infotainment system, OTA update success rates, and API integrations like CarPlay Ultra.</p>
+                    </div>
+                    <div>
+                        <h3 class="text-xl font-semibold mb-3 text-[#F47A20]">Cloud-Powered Customer Engagement:</h3>
+                        <div class="space-y-4 text-sm">
+                            <div class="p-3 bg-[#FFF3E0] rounded-lg shadow">
+                                <p class="font-semibold text-[#2C3E50]">Google Cloud (MHP): Vehicle Configurator</p>
+                                <p>Powers next-gen online configurator with VR. <strong class="text-[#F47A20]">200% increase in configurations to dealers.</strong></p>
+                                <p class="grafana-mention">Grafana can visualize configurator usage patterns, performance metrics, and conversion funnels.</p>
+                            </div>
+                            <div class="p-3 bg-[#FFF3E0] rounded-lg shadow">
+                                <p class="font-semibold text-[#2C3E50]">Salesforce: CRM & Data Unification</p>
+                                <p>360-degree customer view. <strong class="text-[#F47A20]">2.14 million customer profiles.</strong></p>
+                                 <p class="grafana-mention">Grafana can monitor CRM data sync health and customer engagement KPIs.</p>
+                            </div>
+                             <div class="p-3 bg-[#FFF3E0] rounded-lg shadow">
+                                <p class="font-semibold text-[#2C3E50]">AWS (Data Reply): Customer Analytics</p>
+                                <p>Propensity-to-buy modeling. <strong class="text-[#F47A20]">Improved customer predictions.</strong></p>
+                                <p class="grafana-mention">Grafana can track data pipeline performance for analytics and model accuracy over time.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="sustainability" class="mb-12">
+            <div class="stat-card">
+                <h2 class="section-title text-3xl">Sustainable Manufacturing & Operations</h2>
+                <p class="mt-4 mb-6 text-lg">The "Racing. Green." strategy is a core driver for sustainability in manufacturing, targeting carbon neutrality, renewable energy adoption, and waste reduction.</p>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div>
+                        <h3 class="text-xl font-semibold mb-3 text-[#F47A20]">Key Achievements:</h3>
+                        <ul class="space-y-3">
+                            <li class="flex items-center"><span class="text-2xl mr-2">🌍</span> Carbon-neutral manufacturing (Gaydon & St Athan).</li>
+                            <li class="flex items-center"><span class="text-2xl mr-2">💡</span> 100% renewable electricity (UK manufacturing).</li>
+                            <li class="flex items-center"><span class="text-2xl mr-2">♻️</span> 100% waste diverted from landfill.</li>
+                            <li class="flex items-center"><span class="text-2xl mr-2">☀️</span> Investing in on-site solar panel installations.</li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h3 class="text-xl font-semibold mb-3 text-[#F47A20]">Ambitious Future Targets:</h3>
+                         <ul class="space-y-3">
+                            <li class="p-3 bg-[#FFF3E0] rounded-lg shadow"><strong>Net-Zero Manufacturing Facilities:</strong> By 2030</li>
+                            <li class="p-3 bg-[#FFF3E0] rounded-lg shadow"><strong>30% Reduction in Supply Chain Emissions:</strong> By 2030</li>
+                            <li class="p-3 bg-[#FFF3E0] rounded-lg shadow"><strong>Net-Zero Emissions Across Entire Supply Chain:</strong> By 2039</li>
+                         </ul>
+                    </div>
+                </div>
+                <p class="mt-6 text-sm text-gray-700">Foundational systems like Siemens PLM and ERP implementations support these operations.</p>
+                <p class="grafana-mention mt-2">Grafana can provide comprehensive dashboards for "Racing. Green." initiatives, tracking energy generation from solar, water consumption, waste reduction, and progress towards net-zero targets in real-time.</p>
+            </div>
+        </section>
+        
+        <section id="partnerships" class="mb-12">
+            <div class="stat-card">
+                <h2 class="section-title text-3xl">Strategic Alliances: A Network of Innovation</h2>
+                <p class="mt-4 mb-6 text-lg">Aston Martin's technology strategy heavily relies on a diverse ecosystem of strategic partners to access specialized, capital-intensive technologies and accelerate innovation.</p>
+                <div class="hub-container text-center">
+                    <div class="hub-spoke-center text-sm p-2">
+                        <span>Aston Martin</span>
+                        <span>Tech Ecosystem</span>
+                        <span class="grafana-mention text-xs text-gray-200">(Monitored by Grafana)</span>
+                    </div>
+                    <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4 mt-8">
+                        <div class="hub-spoke-arm"><strong>Mercedes-Benz AG:</strong> Powertrain & Vehicle Tech</div>
+                        <div class="hub-spoke-arm"><strong>Lucid Group:</strong> BEV Powertrains & Batteries</div>
+                        <div class="hub-spoke-arm"><strong>Arm:</strong> F1 AI Compute Platform</div>
+                        <div class="hub-spoke-arm"><strong>CoreWeave:</strong> F1 AI Cloud Computing</div>
+                        <div class="hub-spoke-arm"><strong>Salesforce:</strong> CRM & Customer Data Cloud</div>
+                        <div class="hub-spoke-arm"><strong>Google Cloud:</strong> Vehicle Configurator & CX</div>
+                        <div class="hub-spoke-arm"><strong>AWS:</strong> Customer Data Analytics</div>
+                        <div class="hub-spoke-arm"><strong>ServiceNow:</strong> F1 Digital Transformation</div>
+                        <div class="hub-spoke-arm"><strong>NetApp:</strong> F1 Data Management</div>
+                        <div class="hub-spoke-arm"><strong>Siemens PLM:</strong> Product Lifecycle Management</div>
+                        <div class="hub-spoke-arm"><strong>Juniper Networks:</strong> Network Infrastructure</div>
+                        <div class="hub-spoke-arm"><strong>Apple:</strong> CarPlay Ultra Integration</div>
+                    </div>
+                    <p class="mt-6 text-sm text-gray-700">Effective orchestration and integration of this partner network are crucial. Grafana can help monitor the health of APIs and data flows between these interconnected partner systems, ensuring reliability.</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="future" class="mb-12">
+            <div class="stat-card">
+                <h2 class="section-title text-3xl">Navigating the Future: Challenges & Outlook</h2>
+                <p class="mt-4 mb-6 text-lg">Aston Martin's ambitious technology strategy faces inherent challenges, requiring astute navigation to achieve its long-term vision while ensuring financial sustainability.</p>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div>
+                        <h3 class="text-xl font-semibold mb-3 text-[#F47A20]">Key Challenges:</h3>
+                        <ul class="list-disc list-inside space-y-2 text-sm">
+                            <li>Balancing Innovation Costs & Financial Sustainability.</li>
+                            <li>Navigating Electrification Timing.</li>
+                            <li>Integrating a Complex Tech Ecosystem.</li>
+                            <li>The "Software-Defined Vehicle" Imperative.</li>
+                        </ul>
+                        <p class="grafana-mention mt-2">Grafana can provide observability into the software-defined vehicle platform, monitoring performance, updates, and security, helping to manage the complexity of these evolving systems.</p>
+                    </div>
+                    <div>
+                        <h3 class="text-xl font-semibold mb-3 text-[#F47A20]">Future Outlook:</h3>
+                         <ul class="list-disc list-inside space-y-2 text-sm">
+                            <li>Pragmatic evolution, leveraging partnerships.</li>
+                            <li>F1 team as a high-performance tech incubator.</li>
+                            <li>Success of Valhalla PHEV and first BEVs critical.</li>
+                            <li>Continued investment in cloud for CX and data analytics.</li>
+                            <li>"Racing. Green." to drive sustainability.</li>
+                         </ul>
+                    </div>
+                </div>
+                <p class="mt-6 text-center font-semibold">The journey requires disciplined execution, robust financial management, and finding the optimal balance between cherished heritage and transformative technology.</p>
+            </div>
+        </section>
+    </main>
+
+    <footer class="bg-[#2C3E50] text-[#F8F9FA] p-6 text-center mt-12">
+        <p>&copy; Aston Martin Technology Strategy Overview. Grafana Observability Insights.</p>
+        <p class="text-xs mt-1">This infographic is an interpretation of the Deep Research report.</p>
+    </footer>
+
+    <script>
+        function processChartLabels(labels, maxLength = 16) {
+            return labels.map(label => {
+                if (typeof label === 'string' && label.length > maxLength) {
+                    const words = label.split(' ');
+                    const newLabel = [];
+                    let currentLine = '';
+                    words.forEach(word => {
+                        if ((currentLine + word).length > maxLength) {
+                            newLabel.push(currentLine.trim());
+                            currentLine = word + ' ';
+                        } else {
+                            currentLine += word + ' ';
+                        }
+                    });
+                    newLabel.push(currentLine.trim());
+                    return newLabel;
+                }
+                return label;
+            });
+        }
+
+        const commonTooltipTitleCallback = function(tooltipItems) {
+            const item = tooltipItems[0];
+            let label = item.chart.data.labels[item.dataIndex];
+            if (Array.isArray(label)) {
+                return label.join(' ');
+            } else {
+                return label;
+            }
+        };
+
+        document.addEventListener('DOMContentLoaded', function() {
+            const powertrainCtx = document.getElementById('powertrainMixChart').getContext('2d');
+            const powertrainLabels = processChartLabels(['ICE & Hybrid Powertrains', 'Battery Electric Vehicles (BEV)']);
+            new Chart(powertrainCtx, {
+                type: 'doughnut',
+                data: {
+                    labels: powertrainLabels,
+                    datasets: [{
+                        label: 'Projected Sales Mix (Next 5 Years)',
+                        data: [85, 15], 
+                        backgroundColor: ['#F47A20', '#C65100'], // Grafana Orange, Dark Orange
+                        borderColor: ['#FFFFFF', '#FFFFFF'],
+                        borderWidth: 2
+                }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            position: 'bottom',
+                            labels: {
+                                color: '#2C3E50', 
+                                 boxWidth: 15,
+                                 padding: 15,
+                                 font: { size: 10 }
+                            }
+                        },
+                        tooltip: {
+                            callbacks: {
+                                title: commonTooltipTitleCallback,
+                                label: function(context) {
+                                    let label = context.dataset.label || '';
+                                    if (label) { label += ': '; }
+                                    if (context.parsed !== null) { label += context.parsed + '%'; }
+                                    return label;
+                                }
+                            },
+                            backgroundColor: '#2C3E50', 
+                            titleColor: '#F8F9FA', 
+                            bodyColor: '#F8F9FA', 
+                            borderColor: '#F47A20',
+                            borderWidth: 1
+                        }
+                    }
+                }
+            });
+        });
+
+    </script>
+
+</body>
+</html>
